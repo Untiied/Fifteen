@@ -8,6 +8,8 @@
 
 precomputed_renderable_target_transforms calculate_rendering_grid(game_board* board, struct window_size size)
 {
+	float scale = 1.0;
+
 	precomputed_renderable_target_transforms info;
 
 	/* This is the amount of space we have to work with after a left-size pixel offset of "EDGEGUARD." */
@@ -15,13 +17,14 @@ precomputed_renderable_target_transforms calculate_rendering_grid(game_board* bo
 
 	/* This is how big our rectangle can physically be to render the texture target. */
 	info.width = space_after_offset_x / board->col_max;
-
+	info.width *= scale;
 
 	// Now for the y value;
 
 	int space_after_offset_y = size.height - (board->row_max * EDGEGUARD);
 
 	info.height = space_after_offset_y / board->row_max;
+	info.height *= scale;
 
 	return info;
 }
